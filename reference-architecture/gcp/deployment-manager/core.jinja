@@ -9,7 +9,7 @@ resources:
       initializeParams:
         sourceImage: global/images/family/{{ properties['gold_image'] }}
         diskSizeGb: {{ properties['bastion_disk_size'] }}
-        diskType: zones/{{ properties['zone'] }}/diskTypes/pd-ssd
+        diskType: zones/{{ properties['zone'] }}/diskTypes/pd-standard
     machineType: zones/{{ properties['zone'] }}/machineTypes/{{ properties['bastion_machine_type'] }}
     metadata: {}
     networkInterfaces:
@@ -52,7 +52,7 @@ resources:
         initializeParams:
           diskSizeGb: {{ properties['master_boot_disk_size'] }}
           sourceImage: global/images/family/{{ properties['gold_image'] }}
-          diskType: pd-ssd
+          diskType: pd-standard
       {% if properties['containerized'] %}
       - autoDelete: true
         boot: false
@@ -61,7 +61,7 @@ resources:
         initializeParams:
           sourceImage: global/images/empty-1g
           diskSizeGb: {{ properties['master_docker_disk_size'] }}
-          diskType: pd-ssd
+          diskType: pd-standard
       {% endif %}
       machineType: {{ properties['master_machine_type'] }}
       {% if properties['containerized'] %}
@@ -128,7 +128,7 @@ resources:
         initializeParams:
           diskSizeGb: {{ properties['infra_boot_disk_size'] }}
           sourceImage: global/images/family/{{ properties['gold_image'] }}
-          diskType: pd-ssd
+          diskType: pd-standard
       - autoDelete: true
         boot: false
         index: 1
@@ -136,7 +136,7 @@ resources:
         initializeParams:
           sourceImage: global/images/empty-1g
           diskSizeGb: {{ properties['infra_docker_disk_size'] }}
-          diskType: pd-ssd
+          diskType: pd-standard
       - autoDelete: true
         boot: false
         index: 2
@@ -144,7 +144,7 @@ resources:
         initializeParams:
           sourceImage: global/images/empty-1g
           diskSizeGb: {{ properties['infra_openshift_disk_size'] }}
-          diskType: pd-ssd
+          diskType: pd-standard
       machineType: {{ properties['infra_machine_type'] }}
       metadata:
         items:
@@ -211,7 +211,7 @@ resources:
         initializeParams:
           diskSizeGb: {{ properties['node_boot_disk_size'] }}
           sourceImage: global/images/family/{{ properties['gold_image'] }}
-          diskType: pd-ssd
+          diskType: pd-standard
       - autoDelete: true
         boot: false
         index: 1
@@ -219,7 +219,7 @@ resources:
         initializeParams:
           sourceImage: global/images/empty-1g
           diskSizeGb: {{ properties['node_docker_disk_size'] }}
-          diskType: pd-ssd
+          diskType: pd-standard
       - autoDelete: true
         boot: false
         index: 2
@@ -227,7 +227,7 @@ resources:
         initializeParams:
           sourceImage: global/images/empty-1g
           diskSizeGb: {{ properties['node_openshift_disk_size'] }}
-          diskType: pd-ssd
+          diskType: pd-standard
       machineType: {{ properties['node_machine_type'] }}
       metadata:
         items:

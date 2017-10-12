@@ -19,7 +19,7 @@
   when: ansible_env.SSH_AUTH_SOCK is defined
 
 - name: get current ssh keys in the gcp project
-  command: gcloud --project {{ gcloud_project }} compute project-info describe --format='value(commonInstanceMetadata.items.key.sshKeys.value)'
+  command: gcloud --project {{ gcloud_project }} compute project-info describe --format='value(commonInstanceMetadata.items.key.ssh-keys.value)'
   register: project_ssh_keys
   changed_when: false
 
@@ -35,5 +35,5 @@
     when: "'ssh-rsa' in project_ssh_keys.stdout"
 
   - name: add our ssh key to the project
-    command: gcloud --project {{ gcloud_project }} compute project-info add-metadata --metadata='sshKeys={{ ssh_public_key_metadata }}'
+    command: gcloud --project {{ gcloud_project }} compute project-info add-metadata --metadata='ssh-keys={{ ssh_public_key_metadata }}'
   when: public_ssh_key.content | b64decode | regex_replace('ssh-rsa (.*) cloud-user', '\\1') | trim not in project_ssh_keys.stdout
