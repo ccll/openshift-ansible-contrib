@@ -21,7 +21,7 @@
   - meta: refresh_inventory
 
 - name: gather facts from all systems
-  hosts: centos-7-ocp-gold-image
+  hosts: all
   tasks: []
 
 - name: continue with the core infrastructure deployment, after the instances are created
