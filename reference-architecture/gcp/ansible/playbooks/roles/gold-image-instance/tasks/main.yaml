@@ -54,6 +54,9 @@
     - docker
     - iptables-services
 
+  - name: remove certs from '/etc/docker/certs.d/'
+    shell: /bin/rm -rf /etc/docker/certs.d/*
+
   - name: add disk_setup to cloud_config_modules
     lineinfile:
       dest: /etc/cloud/cloud.cfg
