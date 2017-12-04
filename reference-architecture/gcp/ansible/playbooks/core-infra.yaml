@@ -10,9 +10,9 @@
     include_role:
       name: wait-for-instance-group
     with_items:
-    - '{{ prefix }}-master'
+    #- '{{ prefix }}-master'
+    #- '{{ prefix }}-infra-node'
     - '{{ prefix }}-node'
-    - '{{ prefix }}-infra-node'
     loop_control:
       loop_var: instance_group
   - name: refresh gce inventory
@@ -29,11 +29,12 @@
   roles:
   - dns-records
   - ssh-proxy
-  - role: wait-for-instance
-    instance: '{{ hostvars[prefix + "-bastion"]["gce_public_ip"] }}'
+  #- role: wait-for-instance
+  #  instance: '{{ hostvars[prefix + "-bastion"]["gce_public_ip"] }}'
 
 - name: wait for all instances to accept ssh connections
-  hosts: '{{ prefix }}-bastion'
+  #hosts: '{{ prefix }}-bastion'
+  hosts: localhost
   tasks:
   - name: wait for all instances
     include_role:

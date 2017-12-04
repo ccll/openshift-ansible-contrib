@@ -13,7 +13,7 @@
   - record: '{{ openshift_master_cluster_public_hostname }}'
     type: A
   - record: '{{ openshift_master_cluster_hostname }}'
-    type: A
+    type: CNAME
   - record: '{{ wildcard_zone }}'
     type: A
   - record: '*.{{ wildcard_zone }}'

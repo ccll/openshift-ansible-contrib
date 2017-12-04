@@ -1,8 +1,8 @@
 ---
-- name: get master ssl lb ip
-  command: gcloud --project {{ gcloud_project }} compute addresses describe {{ prefix }}-master-https-lb-ip --global --format='value(address)'
-  register: master_ssl_lb_ip
-  changed_when: false
+#- name: get master ssl lb ip
+#  command: gcloud --project {{ gcloud_project }} compute addresses describe {{ prefix }}-master-https-lb-ip --global --format='value(address)'
+#  register: master_ssl_lb_ip
+#  changed_when: false
 
 - name: get master network lb ip
   command: gcloud --project {{ gcloud_project }} compute addresses describe {{ prefix }}-master-network-lb-ip --region {{ gcloud_region }} --format='value(address)'
@@ -27,10 +27,13 @@
     project_id: '{{ gcloud_project }}'
     state: present
   with_items:
-  - record: '{{ openshift_master_cluster_public_hostname }}'
-    record_data: '{{ master_ssl_lb_ip.stdout }}'
-    type: A
+  #- record: '{{ openshift_master_cluster_public_hostname }}'
+  #  record_data: '{{ master_ssl_lb_ip.stdout }}'
+  #  type: A
   - record: '{{ openshift_master_cluster_hostname }}'
+    record_data: '{{ openshift_master_cluster_public_hostname }}.'
+    type: CNAME
+  - record: '{{ openshift_master_cluster_public_hostname }}'
     record_data: '{{ master_network_lb_ip.stdout }}'
     type: A
   - record: '{{ wildcard_zone }}'

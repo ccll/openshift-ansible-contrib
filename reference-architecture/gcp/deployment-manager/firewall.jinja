@@ -21,17 +21,17 @@ resources:
     targetTags:
     - {{ properties['prefix'] }}-ssh-external
   type: compute.v1.firewall
-- name: {{ properties['prefix'] }}-ssh-internal
-  properties:
-    allowed:
-    - IPProtocol: tcp
-      ports:
-      - '22'
-    description: ''
-    #network: $(ref.default.selfLink)
-    sourceTags:
-    - {{ properties['prefix'] }}-bastion
-  type: compute.v1.firewall
+#- name: {{ properties['prefix'] }}-ssh-internal
+#  properties:
+#    allowed:
+#    - IPProtocol: tcp
+#      ports:
+#      - '22'
+#    description: ''
+#    #network: $(ref.default.selfLink)
+#    sourceTags:
+#    - {{ properties['prefix'] }}-bastion
+#  type: compute.v1.firewall
 - name: {{ properties['prefix'] }}-master-internal-dns
   properties:
     allowed:
@@ -70,6 +70,9 @@ resources:
     - IPProtocol: tcp
       ports:
       - {{ properties['console_port'] }}
+    - IPProtocol: tcp
+      ports:
+      - '80'
     description: ''
     #network: $(ref.default.selfLink)
     sourceRanges:

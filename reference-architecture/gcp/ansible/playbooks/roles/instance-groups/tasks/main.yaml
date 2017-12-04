@@ -1,8 +1,8 @@
 ---
-- name: add bastion to group
-  add_host:
-    name: '{{ hostvars[prefix + "-bastion"].gce_name }}'
-    groups: bastion
+#- name: add bastion to group
+#  add_host:
+#    name: '{{ hostvars[prefix + "-bastion"].gce_name }}'
+#    groups: bastion
 
 - name: add masters to requisite groups
   add_host:
